@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FilmsData</string>
+    <string name="films">Фильмы</string>
+    <string name="genre">Жанры</string>
+    <string name="textview">TextView</string>
+    <string name="main_title">Главная</string>
+</resources>
