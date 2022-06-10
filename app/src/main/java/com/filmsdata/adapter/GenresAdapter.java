@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.filmsdata.GenresClass;
+import com.filmsdata.MainActivity;
 import com.filmsdata.R;
 
 import java.util.Arrays;
@@ -18,11 +19,13 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresView
 
     private final List<String> genresListFil;
     private final LayoutInflater inflater;
+    private final MainActivity.TypeOfViewHolder typeOfViewHolder;
 
 
-    public GenresAdapter(Context context, List<String> genresListFil){
+    public GenresAdapter(Context context, List<String> genresListFil, MainActivity.TypeOfViewHolder typeOfViewHolder){
         this.genresListFil = genresListFil;
         this.inflater = LayoutInflater.from(context);
+        this.typeOfViewHolder = typeOfViewHolder;
     }
 
     @NonNull

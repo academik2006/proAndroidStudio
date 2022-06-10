@@ -1,14 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FilmsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/black">
+
+        <ImageView
+
+            android:id="@+id/imageViewPic"
+            android:layout_width="116dp"
+            android:layout_height="195dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="50dp"
+            android:contentDescription="@string/pic"
+            android:src="@drawable/pobeg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@+id/imageViewPic"
+            app:layout_constraintTop_toTopOf="@+id/imageViewPic">
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/fragment_style"
+                android:text="@string/textview" />
+
+            <TextView
+                android:id="@+id/textView2Year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/fragment_style"
+                android:layout_marginTop="5dp"
+                android:text="@string/textview" />
+
+            <TextView
+                android:id="@+id/textViewRaiting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/fragment_style"
+                android:layout_marginTop="5dp"
+                android:text="@string/textview" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            style="@style/fragment_style"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/textview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewPic" />
+
+        <TextView
+            android:id="@+id/textViewRussian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/inria_serif_bold"
+            android:text="@string/textview"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageButtonBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButtonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/gray_title_films"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -1,4 +1,5 @@
 package com.filmsdata.adapter;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.filmsdata.FilmsClass;
+import com.filmsdata.MainActivity;
 import com.filmsdata.R;
 import com.squareup.picasso.Picasso;
 
@@ -20,11 +21,20 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
 
     private final List<FilmsClass> filmsClassList;
     private final LayoutInflater inflater;
+    private final MainActivity.TypeOfViewHolder typeOfViewHolder;
 
-    public FilmsAdapter (Context context, List<FilmsClass> filmsClassList){
+    public FilmsAdapter(Context context, List<FilmsClass> filmsClassList, MainActivity.TypeOfViewHolder typeOfViewHolder, OnFilmClickListener onFilmClickListener){
         this.filmsClassList = filmsClassList;
         this.inflater = LayoutInflater.from(context);
+        this.typeOfViewHolder = typeOfViewHolder;
+        this.onFilmClickListener = onFilmClickListener;
     }
+
+    public interface OnFilmClickListener{
+        void onFilmClick(FilmsClass film, int position);
+    }
+
+    private final OnFilmClickListener onFilmClickListener;
 
     @NonNull
     @Override
@@ -37,13 +47,20 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FilmsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FilmsViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         FilmsClass film = filmsClassList.get(position);
-        //holder.changeHolder(film.getTitleOfFilm());
         holder.changeHolder(film);
-        //Log.i ("MOY", "Измененен холдер" + position);
-        //Log.d ("MOY", "Измененен холдер" + position);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onFilmClickListener.onFilmClick(film,position);
+                Log.i("MOY", "Передан по клику объект film" + film.getName());
+
+            }
+        });
 
     }
 
@@ -51,6 +68,8 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
     public int getItemCount() {
         return filmsClassList.size();
     }
+
+
 
     class FilmsViewHolder extends RecyclerView.ViewHolder {
 
@@ -62,12 +81,19 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
             super(itemView);
             films_text = itemView.findViewById(R.id.textViewFilms);
             imageViewFilm = itemView.findViewById(R.id.imageViewFilm);
+
+
         }
 
         void changeHolder (FilmsClass film) {
-            films_text.setText(film.getTitleOfFilm());
+            films_text.setText(film.getLocalizename());
             Picasso.get().load(film.getImage_url()).into(imageViewFilm);
 
         }
+
+
+
+        }
     }
-}
+
+

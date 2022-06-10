@@ -1,16 +1,12 @@
 package com.filmsdata.adapter;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.filmsdata.HeadersClass;
 import com.filmsdata.MainActivity;
 import com.filmsdata.R;
@@ -19,12 +15,14 @@ public class HeadersAdapter extends RecyclerView.Adapter<HeadersAdapter.HeaderVi
 
     String header;
     private final LayoutInflater inflater;
+    private final MainActivity.TypeOfViewHolder typeOfViewHolder;
 
-        public HeadersAdapter (Context context, String header){
+        public HeadersAdapter(Context context, String header, MainActivity.TypeOfViewHolder typeOfViewHolder){
         this.header = header;
         this.inflater = LayoutInflater.from(context);
+        this.typeOfViewHolder = typeOfViewHolder;
+        }
 
-    }
 
     @NonNull
     @Override
@@ -38,15 +36,9 @@ public class HeadersAdapter extends RecyclerView.Adapter<HeadersAdapter.HeaderVi
     @Override
     public void onBindViewHolder(@NonNull HeaderViewHolder holder, int position) {
 
-        //Header header = new Header("Первый заголовок");
-        //holder.changeHolder(header.getTitle());
-        //Header header = headers.get(position);
-        //holder.changeHolder("Тест заголовка");
-
-        HeadersClass header_of_title = new HeadersClass(header);
+        HeadersClass header_of_title = new HeadersClass(header, typeOfViewHolder);
         holder.changeHolder(header_of_title.getTitle());
         Log.d ("MOY", "меняем тест заголовка разделов");
-
 
     }
 
@@ -54,6 +46,7 @@ public class HeadersAdapter extends RecyclerView.Adapter<HeadersAdapter.HeaderVi
     public int getItemCount() {
         return 1;
     }
+
 
     class HeaderViewHolder extends RecyclerView.ViewHolder {
 

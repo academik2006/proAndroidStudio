@@ -4,47 +4,60 @@ import java.util.List;
 
 public class FilmsClass {
 
-    private String titleOfFilm;
+    private String name;
     private String image_url;
     private String description;
     private List<String> genres;
+    private MainActivity.TypeOfViewHolder typeOfViewHolder;
+    private String localizename;
+    private int year;
+    private Object rating;
 
-    public FilmsClass(String titleOfFilm, String image_url, String description, List<String> genres) {
-        this.titleOfFilm = titleOfFilm;
+    public FilmsClass(String name, String image_url, String description, List<String> genres, MainActivity.TypeOfViewHolder typeOfViewHolder, String localizename, int year, Object rating) {
+        this.name = name;
         this.image_url = image_url;
         this.description = description;
         this.genres = genres;
+        this.typeOfViewHolder = typeOfViewHolder;
+        this.localizename = localizename;
+        this.year = year;
+        this.rating = rating;
     }
 
-    public String getTitleOfFilm() {
-        return titleOfFilm;
+    public String getName() {
+        return name;
     }
 
-    public void setTitleOfFilm(String titleOfFilm) {
-        this.titleOfFilm = titleOfFilm;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getImage_url() {
         return image_url;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+
+    public MainActivity.TypeOfViewHolder getTypeOfViewHolder() {
+        return typeOfViewHolder;
     }
 
-    public List<String> getGenres() {
-        return genres;
+
+    public String getLocalizename() {
+        return localizename;
     }
 
-    public void setGenres(List<String> genres) {
-        this.genres = genres;
+
+    public int getYear() {
+        return year;
     }
+
+    public Object getRating() {
+        return rating;
+    }
+
 }

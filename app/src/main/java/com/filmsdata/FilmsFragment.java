@@ -1,64 +1,80 @@
 package com.filmsdata;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FilmsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FilmsFragment extends Fragment {
+import com.squareup.picasso.Picasso;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.Objects;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class FilmsFragment extends DialogFragment {
 
-    public FilmsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FilmsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FilmsFragment newInstance(String param1, String param2) {
-        FilmsFragment fragment = new FilmsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @SuppressLint("DefaultLocale")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_films, container, false);
+
+
+
+
+
+        String URL = null;
+        String nameTextEnglish = null;
+        String nameTextRussian = null;
+        int yearText = 0;
+        String descriptionText = null;
+        String ratingText = null;
+
+
+        if (getArguments() != null) {
+            URL = getArguments().getString("URL");
+            nameTextEnglish = getArguments().getString("nameTextEnglish");
+            nameTextRussian = getArguments().getString("nameTextRussian");
+            yearText = getArguments().getInt("yearText");
+            descriptionText = getArguments().getString("descriptionText");
+            ratingText = getArguments().getString("ratingText");
+
+        }
+
+        Log.i("MOY", "Фрагмент получил данные");
+        Objects.requireNonNull(getDialog()).setTitle("Title");
+
+        @SuppressLint("InflateParams")
+        View v = inflater.inflate(R.layout.fragment_films,null,false);
+        TextView description = v.findViewById(R.id.textViewDescription);
+        TextView year = v.findViewById(R.id.textView2Year);
+        TextView  nameEnglish = v.findViewById(R.id.textViewName);
+        TextView  nameRussian = v.findViewById(R.id.textViewRussian);
+        TextView  raiting = v.findViewById(R.id.textViewRaiting);
+        ImageView imagePic = v.findViewById(R.id.imageViewPic);
+        ImageButton narrowBack = v.findViewById(R.id.imageButtonBack);
+
+        description.setText(descriptionText);
+        year.setText(String.format("Год: %d", yearText));
+        nameEnglish.setText(nameTextEnglish);
+        nameRussian.setText(nameTextRussian);
+        Picasso.get().load(URL).into(imagePic);
+        raiting.setText(String.format("Рейтинг: %s", ratingText));
+
+        narrowBack.setOnClickListener(v1 -> dismiss());
+        return v;
+
+    }
+
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        Log.d("MOY", "FragmentDialog: onDismiss");
     }
 }
