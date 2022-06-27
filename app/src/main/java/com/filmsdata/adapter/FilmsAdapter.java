@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.filmsdata.FilmsClass;
+import com.filmsdata.FilmsClassDouble;
 import com.filmsdata.MainActivity;
 import com.filmsdata.R;
 import com.squareup.picasso.Picasso;
@@ -20,18 +21,21 @@ import java.util.List;
 public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHolder> {
 
     private final List<FilmsClass> filmsClassList;
+    private final List<FilmsClassDouble> filmsClassDoublesList;
     private final LayoutInflater inflater;
     private final MainActivity.TypeOfViewHolder typeOfViewHolder;
 
-    public FilmsAdapter(Context context, List<FilmsClass> filmsClassList, MainActivity.TypeOfViewHolder typeOfViewHolder, OnFilmClickListener onFilmClickListener){
+
+    public FilmsAdapter(Context context, List<FilmsClass> filmsClassList, List<FilmsClassDouble> filmsClassDoublesList, MainActivity.TypeOfViewHolder typeOfViewHolder, OnFilmClickListener onFilmClickListener){
         this.filmsClassList = filmsClassList;
+        this.filmsClassDoublesList = filmsClassDoublesList;
         this.inflater = LayoutInflater.from(context);
         this.typeOfViewHolder = typeOfViewHolder;
         this.onFilmClickListener = onFilmClickListener;
     }
 
     public interface OnFilmClickListener{
-        void onFilmClick(FilmsClass film, int position);
+        void onFilmClick(FilmsClassDouble filmsClassDouble, View itemView, int position);
     }
 
     private final OnFilmClickListener onFilmClickListener;
@@ -49,15 +53,22 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
     @Override
     public void onBindViewHolder(@NonNull FilmsViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        FilmsClass film = filmsClassList.get(position);
-        holder.changeHolder(film);
+
+        //FilmsClass film = filmsClassList.get(position);
+        //FilmsClassDouble filmsClassDouble = new FilmsClassDouble ());
+
+        FilmsClassDouble filmsClassDouble = new FilmsClassDouble(filmsClassDoublesList.get(position).getFilm1(), filmsClassDoublesList.get(position).getFilm2());
+
+        //holder.changeHolder(film);
+        holder.changeHolder(filmsClassDouble);
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                onFilmClickListener.onFilmClick(film,position);
-                Log.i("MOY", "Передан по клику объект film" + film.getName());
+                onFilmClickListener.onFilmClick(filmsClassDouble, holder.itemView, position);
+                Log.i("MOY", "Передан по клику объект filmClassDouble" + holder.itemView);
 
             }
         });
@@ -66,32 +77,39 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
 
     @Override
     public int getItemCount() {
-        return filmsClassList.size();
+
+        return filmsClassDoublesList.size();
+
     }
-
-
 
     class FilmsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView films_text;
-        ImageView imageViewFilm;
+        TextView films_text1;
+        ImageView imageViewFilm1;
 
+        TextView films_text2;
+        ImageView imageViewFilm2;
 
         public FilmsViewHolder(@NonNull View itemView) {
             super(itemView);
-            films_text = itemView.findViewById(R.id.textViewFilms);
-            imageViewFilm = itemView.findViewById(R.id.imageViewFilm);
 
+            films_text1 = itemView.findViewById(R.id.textViewFilms1);
+            imageViewFilm1 = itemView.findViewById(R.id.imageViewFilm1);
 
-        }
-
-        void changeHolder (FilmsClass film) {
-            films_text.setText(film.getLocalizename());
-            Picasso.get().load(film.getImage_url()).into(imageViewFilm);
+            films_text2 = itemView.findViewById(R.id.textViewFilms2);
+            imageViewFilm2 = itemView.findViewById(R.id.imageViewFilm2);
 
         }
 
+        void changeHolder (FilmsClassDouble filmsClassDouble) {
 
+                films_text1.setText(filmsClassDouble.getFilm1().getLocalizename());
+                Picasso.get().load(filmsClassDouble.getFilm1().getImage_url()).into(imageViewFilm1);
+
+                films_text2.setText(filmsClassDouble.getFilm2().getLocalizename());
+                Picasso.get().load(filmsClassDouble.getFilm2().getImage_url()).into(imageViewFilm2);
+
+        }
 
         }
     }

@@ -49,6 +49,7 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenresView
         String genre = genresListFil.get(position);
         holder.genre_text.setText(genre);
 
+
     }
 
     @Override

@@ -60,4 +60,7 @@ public class FilmsClass {
         return rating;
     }
 
+    public void setTypeOfViewHolder(MainActivity.TypeOfViewHolder typeOfViewHolder) {
+        this.typeOfViewHolder = typeOfViewHolder;
+    }
 }

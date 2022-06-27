@@ -26,25 +26,21 @@ public class FilmsFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
-
-
-        String URL = null;
-        String nameTextEnglish = null;
-        String nameTextRussian = null;
-        int yearText = 0;
-        String descriptionText = null;
-        String ratingText = null;
+        String URL1 = null;
+        String nameTextEnglish1 = null;
+        String nameTextRussian1 = null;
+        int yearText1 = 0;
+        String descriptionText1 = null;
+        String ratingText1 = null;
 
 
         if (getArguments() != null) {
-            URL = getArguments().getString("URL");
-            nameTextEnglish = getArguments().getString("nameTextEnglish");
-            nameTextRussian = getArguments().getString("nameTextRussian");
-            yearText = getArguments().getInt("yearText");
-            descriptionText = getArguments().getString("descriptionText");
-            ratingText = getArguments().getString("ratingText");
+            URL1 = getArguments().getString("URL");
+            nameTextEnglish1 = getArguments().getString("nameTextEnglish");
+            nameTextRussian1 = getArguments().getString("nameTextRussian");
+            yearText1 = getArguments().getInt("yearText");
+            descriptionText1 = getArguments().getString("descriptionText");
+            ratingText1 = getArguments().getString("ratingText");
 
         }
 
@@ -61,12 +57,12 @@ public class FilmsFragment extends DialogFragment {
         ImageView imagePic = v.findViewById(R.id.imageViewPic);
         ImageButton narrowBack = v.findViewById(R.id.imageButtonBack);
 
-        description.setText(descriptionText);
-        year.setText(String.format("Год: %d", yearText));
-        nameEnglish.setText(nameTextEnglish);
-        nameRussian.setText(nameTextRussian);
-        Picasso.get().load(URL).into(imagePic);
-        raiting.setText(String.format("Рейтинг: %s", ratingText));
+        description.setText(descriptionText1);
+        year.setText(String.format("Год: %d", yearText1));
+        nameEnglish.setText(nameTextEnglish1);
+        nameRussian.setText(nameTextRussian1);
+        Picasso.get().load(URL1).into(imagePic);
+        raiting.setText(String.format("Рейтинг: %s", ratingText1));
 
         narrowBack.setOnClickListener(v1 -> dismiss());
         return v;
